@@ -1,0 +1,686 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pasaporte Explora - Prototipo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand" data-view="home" role="button" tabindex="0">
+      <img class="brand-logo" src="images/logo.png"
+           alt="Pasaporte Explora" />
+    </div>
+
+    <nav class="nav">
+      <button class="nav-link active" data-view="home">Inicio</button>
+      <button class="nav-link" data-view="explore">Explorar</button>
+      <button class="nav-link" data-view="passport">Mi Pasaporte</button>
+      <button class="nav-link" data-view="activities">Mis actividades</button>
+      <button class="nav-link" data-view="favorites">Favoritos</button>
+      <button class="nav-link" data-view="expand">Ampliar</button>
+      <button class="nav-link" data-view="help">Ayuda</button>
+    </nav>
+
+    <button class="mobile-menu-btn"
+            id="mobile-menu-btn"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobile-nav">
+      ☰ Menú
+    </button>
+
+    <nav id="mobile-nav" class="mobile-nav hidden"
+         aria-label="Navegación móvil">
+      <button data-view="home">🏠 Inicio</button>
+      <button data-view="explore">🧭 Explorar actividades</button>
+      <button data-view="activities">📅 Mis actividades</button>
+      <button data-view="passport">📖 Mi Pasaporte</button>
+      <button data-view="favorites">♡ Favoritos</button>
+      <button data-view="expand">✦ Ampliar</button>
+      <button data-view="help">❔ Ayuda</button>
+    </nav>
+  </header>
+
+  <main id="app">
+
+    <!-- INICIO -->
+    <section class="view active" id="view-home">
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">
+            TU PRÓXIMA AFICIÓN PUEDE ESTAR AQUÍ
+          </span>
+          <h1>Explora.<br>Prueba. Descubre.</h1>
+          <p>
+            Un pasaporte de actividades para vivir nuevas
+            experiencias a tu ritmo, sin comprometerte
+            desde el principio con un curso completo.
+          </p>
+          <button class="primary-btn" data-view="explore">
+            Explorar actividades →
+          </button>
+        </div>
+
+        <div class="hero-image">
+          <img src="images/acuarela.webp"
+               alt="Personas participando en un taller de acuarela" />
+        </div>
+      </section>
+
+      <section class="metrics">
+        <div class="metric">
+          <strong id="metric-sessions">28</strong>
+          <span>sesiones</span>
+        </div>
+        <div class="metric">
+          <strong>10</strong>
+          <span>actividades</span>
+        </div>
+        <div class="metric">
+          <strong>Flexible</strong>
+          <span>reserva</span>
+        </div>
+        <div class="metric">
+          <strong>Social</strong>
+          <span>conecta con gente</span>
+        </div>
+        <div class="metric">
+          <strong>A tu ritmo</strong>
+          <span>repite o cambia</span>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">EMPIEZA POR AQUÍ</span>
+            <h2>Categorías</h2>
+          </div>
+          <button class="text-btn" data-view="explore">
+            Ver todas →
+          </button>
+        </div>
+
+        <div class="category-grid" id="home-categories"></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">RECOMENDADAS PARA TI</span>
+            <h2>Actividades destacadas</h2>
+          </div>
+        </div>
+
+        <div class="cards-grid" id="featured-grid"></div>
+      </section>
+
+    </section>
+
+    <!-- EXPLORAR -->
+    <section class="view" id="view-explore">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">DESCUBRE</span>
+          <h1>Explorar actividades</h1>
+          <p>
+            Prueba algo nuevo sin comprometerte
+            desde el principio.
+          </p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="search-input"
+                 type="search"
+                 placeholder="Buscar actividades..." />
+        </div>
+
+        <div class="filter-row" id="filter-row"></div>
+
+        <div class="advanced-filters">
+          <label>
+            Ubicación
+            <select id="filter-location">
+              <option value="">Todas las ubicaciones</option>
+              <option>Madrid</option>
+              <option>Getafe</option>
+              <option>Leganés</option>
+              <option>Guadarrama</option>
+            </select>
+          </label>
+
+          <label>
+            Nivel
+            <select id="filter-level">
+              <option value="">Todos los niveles</option>
+              <option>Inicial</option>
+              <option>Medio</option>
+              <option>Intermedio</option>
+              <option>Todos</option>
+            </select>
+          </label>
+
+          <label>
+            Sesiones desde
+            <input id="filter-date" type="date" />
+          </label>
+
+          <button class="outline-btn" id="clear-filters">
+            Limpiar filtros
+          </button>
+        </div>
+
+      </div>
+
+      <div class="cards-grid" id="activities-grid"></div>
+    </section>
+
+    <!-- MI PASAPORTE -->
+    <section class="view" id="view-passport">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">TU RECORRIDO</span>
+          <h1>Mi Pasaporte</h1>
+          <p>
+            Consulta tus sesiones y sigue descubriendo
+            nuevas actividades.
+          </p>
+        </div>
+      </div>
+
+      <div class="passport-layout">
+
+        <div class="passport-card">
+          <div class="passport-top">
+            <div>
+              <span class="passport-label">
+                PASAPORTE EXPLORA
+              </span>
+              <h2>Tu aventura continúa</h2>
+            </div>
+            <div class="compass-mark">🧭</div>
+          </div>
+
+          <div class="session-counter">
+            <div>
+              <strong id="remaining-count">28</strong>
+              <span>sesiones disponibles</span>
+            </div>
+
+            <div>
+              <strong id="used-count">0</strong>
+              <span>sesiones realizadas</span>
+            </div>
+
+            <div>
+              <strong id="reserved-count">0</strong>
+              <span>sesiones reservadas</span>
+            </div>
+          </div>
+
+          <div class="progress-track"
+               role="img"
+               aria-label="Progreso del pasaporte">
+            <div id="passport-progress"></div>
+            <div id="passport-reserved-progress"></div>
+            <div id="passport-free-progress"></div>
+          </div>
+
+          <div class="progress-legend">
+            <span>
+              <i class="legend-dot done"></i>
+              Realizadas
+            </span>
+            <span>
+              <i class="legend-dot held"></i>
+              Reservadas
+            </span>
+            <span>
+              <i class="legend-dot free"></i>
+              Disponibles
+            </span>
+          </div>
+
+          <p class="muted">
+            28 sesiones en total. Las reservas pendientes
+            apartan una sesión. Si cancelas, recuperas
+            esa sesión automáticamente.
+          </p>
+        </div>
+
+        <div class="info-panel">
+          <h3>¿Qué puedes hacer?</h3>
+          <ul class="clean-list">
+            <li>✓ Probar nuevas actividades</li>
+            <li>✓ Repetir tus favoritas</li>
+            <li>✓ Cambiar cuando quieras</li>
+            <li>✓ Combinar intereses</li>
+          </ul>
+          <button class="secondary-btn" data-view="explore">
+            Seguir explorando
+          </button>
+        </div>
+
+      </div>
+
+      <section class="section-block">
+        <div class="reset-panel">
+          <div>
+            <h3>Datos de demostración</h3>
+            <p class="muted">
+              Puedes borrar todas tus reservas y favoritos
+              para empezar de nuevo con 28 sesiones.
+            </p>
+          </div>
+
+          <button class="outline-btn" id="reset-data">
+            Restablecer datos de prueba
+          </button>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">TU HISTORIAL</span>
+            <h2>Historial de experiencias</h2>
+          </div>
+        </div>
+        <div id="passport-history" class="history-list"></div>
+      </section>
+    </section>
+
+    <!-- MIS ACTIVIDADES -->
+    <section class="view" id="view-activities">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">TU EXPERIENCIA</span>
+          <h1>Mis actividades</h1>
+          <p>
+            Gestiona tus reservas. Cuando llegue su fecha
+            y hora de inicio, pasarán automáticamente
+            a realizadas.
+          </p>
+        </div>
+      </div>
+
+      <div class="tabs" role="group"
+           aria-label="Filtrar mis actividades">
+        <button class="tab-btn active"
+                data-activity-tab="reserved">
+          Próximas
+        </button>
+        <button class="tab-btn"
+                data-activity-tab="completed">
+          Realizadas
+        </button>
+      </div>
+
+      <div id="my-activities" class="cards-grid"></div>
+    </section>
+
+    <!-- FAVORITOS -->
+    <section class="view" id="view-favorites">
+      <div class="page-heading">
+        <span class="eyebrow">TUS INTERESES</span>
+        <h1>Mis favoritos</h1>
+        <p>
+          Guarda actividades que te gustaría probar
+          más adelante.
+        </p>
+      </div>
+      <div id="favorite-grid" class="cards-grid"></div>
+    </section>
+
+    <!-- AMPLIAR -->
+    <section class="view" id="view-expand">
+      <div class="page-heading">
+        <span class="eyebrow">SIGUE EXPLORANDO</span>
+        <h1>Ampliar experiencias</h1>
+        <p>
+          Cuando termines tus sesiones podrás descubrir
+          otras formas de continuar explorando.
+        </p>
+      </div>
+
+      <div class="info-panel readable">
+        <h2>Tu aventura no tiene por qué terminar aquí</h2>
+        <p>
+          Pasaporte Explora plantea la posibilidad de ampliar
+          las experiencias o continuar con las aficiones
+          que más te hayan gustado.
+        </p>
+        <p>
+          Las modalidades, precios y condiciones de ampliación
+          todavía no están definidos. Esta pantalla es
+          informativa y no realiza compras.
+        </p>
+        <button class="primary-btn" data-view="explore">
+          Descubrir actividades
+        </button>
+      </div>
+    </section>
+
+    <!-- AYUDA -->
+    <section class="view" id="view-help">
+      <div class="page-heading">
+        <span class="eyebrow">ESTAMOS PARA AYUDARTE</span>
+        <h1>¿Necesitas ayuda?</h1>
+        <p>
+          Consulta cómo funciona el pasaporte y cómo
+          gestionar tus actividades.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <details open>
+          <summary>¿Cómo reservo una actividad?</summary>
+          <p>
+            Busca una actividad, pulsa «Ver actividad»,
+            selecciona un día disponible y después un
+            horario. Revisa el resumen y confirma.
+          </p>
+        </details>
+
+        <details>
+          <summary>¿Puedo cancelar una reserva?</summary>
+          <p>
+            Sí. En «Mis actividades» puedes cancelar
+            una sesión antes de que empiece.
+            Recuperarás la sesión de tu pasaporte.
+          </p>
+        </details>
+
+        <details>
+          <summary>¿Cuándo pasa a realizada?</summary>
+          <p>
+            En esta demostración, automáticamente cuando llega
+            su fecha y hora de inicio, sin verificar asistencia.
+          </p>
+        </details>
+
+        <details>
+          <summary>¿Tengo que registrarme o pagar?</summary>
+          <p>
+            No. Este es un prototipo sin registro ni
+            pagos reales, con horarios y plazas simulados.
+          </p>
+        </details>
+
+        <details>
+          <summary>¿Puedo asistir sin acompañante?</summary>
+          <p>
+            Sí, las actividades están planteadas para admitir
+            participantes que acuden solos; revisa los
+            requisitos de cada ficha.
+          </p>
+        </details>
+      </div>
+
+      <p class="muted">
+        Demostración: aún no existe un teléfono ni un
+        servicio de atención real.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- =========================================
+       FICHA DE ACTIVIDAD
+       ========================================= -->
+
+  <div class="modal-backdrop hidden"
+       id="activity-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="modal-title">
+
+    <div class="modal activity-detail-modal">
+
+      <button class="modal-close"
+              id="modal-close"
+              type="button"
+              aria-label="Cerrar actividad">
+        ×
+      </button>
+
+      <!-- COLUMNA IZQUIERDA -->
+      <aside class="activity-detail-left">
+
+        <div class="activity-detail-image">
+          <img id="modal-activity-image"
+               src="images/acuarela.webp"
+               alt="Imagen de la actividad" />
+        </div>
+
+        <div class="activity-detail-info">
+
+          <h3>Información de la actividad</h3>
+
+          <div class="detail-grid">
+            <div>
+              <span>Duración</span>
+              <strong id="modal-duration"></strong>
+            </div>
+
+            <div>
+              <span>Nivel</span>
+              <strong id="modal-level"></strong>
+            </div>
+
+            <div>
+              <span>Material</span>
+              <strong>Consultar detalles</strong>
+            </div>
+          </div>
+
+          <div class="additional-details"
+               id="modal-extra"></div>
+
+                    
+          <div class="specialist-favorite-row">
+
+            <div class="specialist-box">
+              <div class="avatar">★</div>
+
+              <div class="specialist-details">
+                <span class="muted">Especialista</span>
+                <strong id="modal-specialist"></strong>
+              </div>
+            </div>
+
+            <button
+              class="outline-btn activity-favorite-btn"
+              id="modal-favorite"
+              type="button"
+              aria-label="Añadir o quitar de favoritos"
+              title="Añadir o quitar de favoritos">
+              ♡
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </aside>
+
+      <!-- COLUMNA DERECHA: DESPLAZABLE -->
+      <div class="modal-content activity-detail-right">
+
+        <span class="tag" id="modal-category"></span>
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-description"></p>
+
+        <div class="activity-trial-note">
+          <strong>Prueba una nueva experiencia</strong>
+          <p>
+            Sesión de prueba sin obligación de continuar.
+            Los horarios y las plazas son simulados.
+          </p>
+        </div>
+
+        <div class="booking-box">
+
+          <!-- SELECCIÓN -->
+          <div id="calendar-stage">
+
+            <h3>Elige un día y una hora disponibles</h3>
+
+            <div class="calendar-shell">
+
+              <div class="calendar-controls">
+                <button type="button"
+                        id="calendar-prev"
+                        aria-label="Mes anterior">‹</button>
+
+                <strong id="calendar-heading"></strong>
+
+                <button type="button"
+                        id="calendar-next"
+                        aria-label="Mes siguiente">›</button>
+              </div>
+
+              <div class="calendar-weekdays">
+                <span>L</span>
+                <span>M</span>
+                <span>X</span>
+                <span>J</span>
+                <span>V</span>
+                <span>S</span>
+                <span>D</span>
+              </div>
+
+              <div class="calendar-days"
+                   id="calendar-days"></div>
+
+              <p class="calendar-help">
+                Los días señalados tienen sesiones disponibles.
+              </p>
+
+            </div>
+
+            <h4>Horarios disponibles</h4>
+
+            <div class="available-times"
+                 id="available-times"></div>
+
+            <button class="primary-btn full"
+                    type="button"
+                    id="booking-continue"
+                    disabled>
+              Continuar
+            </button>
+
+          </div>
+
+          <!-- RESUMEN -->
+          <div id="booking-summary" class="hidden">
+
+            <h3>Comprueba tu reserva</h3>
+
+            <div class="summary-lines">
+              <div>
+                <span>Actividad</span>
+                <strong id="summary-activity"></strong>
+              </div>
+
+              <div>
+                <span>Fecha y hora</span>
+                <strong id="summary-date"></strong>
+              </div>
+
+              <div>
+                <span>Coste</span>
+                <strong id="summary-cost"></strong>
+              </div>
+
+              <div>
+                <span>Sesiones restantes tras reservar</span>
+                <strong id="summary-balance"></strong>
+              </div>
+            </div>
+
+            <p class="muted">
+              Reserva simulada. No se cobra dinero
+              ni se confirma una plaza real.
+            </p>
+
+            <div class="summary-actions">
+              <button class="outline-btn"
+                      type="button"
+                      id="booking-back">
+                Modificar
+              </button>
+
+              <button class="primary-btn"
+                      type="button"
+                      id="reserve-btn">
+                Confirmar reserva
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CONFIRMACIÓN DE CANCELACIÓN -->
+  <div class="modal-backdrop hidden"
+       id="confirmation-modal"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="confirm-title">
+
+    <div class="confirmation-dialog">
+
+      <button class="modal-close"
+              id="confirm-close"
+              aria-label="Cerrar">
+        ×
+      </button>
+
+      <div class="confirmation-icon">🗓️</div>
+      <h2 id="confirm-title">¿Cancelar esta reserva?</h2>
+      <p id="confirm-description"></p>
+
+      <div class="confirmation-actions">
+        <button class="outline-btn" id="confirm-back">
+          Volver
+        </button>
+
+        <button class="primary-btn" id="confirm-action">
+          Confirmar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AVISO -->
+  <div class="toast hidden" id="toast">
+    <strong>¡Reserva confirmada!</strong>
+    <span>
+      La actividad se ha añadido a tu pasaporte.
+    </span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
